@@ -1,3 +1,4 @@
+import MovieHeader from "@/presentation/components/movie/MovieHeader";
 import { useMovie } from "@/presentation/hooks/useMovie";
 import { useLocalSearchParams } from "expo-router";
 import { View, Text, ActivityIndicator, ScrollView } from "react-native";
@@ -7,7 +8,7 @@ const MovieScreen = () => {
 
   const { movieQuery } = useMovie(+id);
 
-  if (movieQuery.isLoading) {
+  if (movieQuery.isLoading || !movieQuery.data) {
     return (
       <View className="flex flex-1 justify-center items-center">
         <Text className="p-2">Espere por favor</Text>
@@ -17,7 +18,11 @@ const MovieScreen = () => {
   }
   return (
     <ScrollView>
-      <Text>{movieQuery.data?.title}</Text>
+      <MovieHeader
+        originalTitle={movieQuery.data.originalTitle}
+        poster={movieQuery.data.poster}
+        title={movieQuery.data.title}
+      />
     </ScrollView>
   );
 };
