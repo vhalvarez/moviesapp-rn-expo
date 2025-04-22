@@ -5,9 +5,10 @@ import {
   Image,
   Pressable,
 } from "react-native";
-import React from "react";
+
 import { router } from "expo-router";
-import Feather from '@expo/vector-icons/Feather';
+import Feather from "@expo/vector-icons/Feather";
+import { LinearGradient } from "expo-linear-gradient";
 
 interface Props {
   poster: string;
@@ -20,6 +21,17 @@ const MovieHeader = ({ originalTitle, poster, title }: Props) => {
 
   return (
     <>
+      <LinearGradient
+        colors={["rgba(0,0,0, 0.3)", "transparent"]}
+        start={[0,0]}
+        style={{
+          height: height * 0.4,
+          position: "absolute",
+          zIndex: 1,
+          width: "100%",
+        }}
+      />
+
       <View
         style={{
           position: "absolute",
@@ -30,7 +42,7 @@ const MovieHeader = ({ originalTitle, poster, title }: Props) => {
         }}
       >
         <Pressable onPress={() => router.dismiss()}>
-        <Feather name="arrow-left" size={35} color="white" />
+          <Feather name="arrow-left" size={35} color="white" />
         </Pressable>
       </View>
 
